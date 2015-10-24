@@ -5,15 +5,17 @@ class board(object):
 		self.snakes = {
 		13: 6,
 		27: 15,
-		44: 34
+		44: 34,
+		62: 45,
+		80: 73
 		}
 
 		self.ladders = {
-		2: 15,
-		3: 15,
-		4: 15,
-		5: 15,
-		39: 54
+		4: 11,
+		11: 24,
+		39: 54,
+		58: 66,
+		75: 92
 		}
 
 	def title(self):
@@ -27,6 +29,6 @@ class board(object):
 		("                                     ~ By Callan Eckett ~                                     ")
 		]
 
-		for x in title:
-			print(x)
+		for current in title:
+			print(current)
 			sleep(0.25)

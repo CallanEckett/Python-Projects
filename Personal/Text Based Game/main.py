@@ -1,35 +1,30 @@
-from assets.entities import *
-from assets.inventory import *
+from assets.player import *
 from assets.commands import *
+from assets.place import *
+from assets.cutscene import *
 
-commands = {"pickup": pickup,
-			"drop": drop,
-			"inventory": inventoryCheck,
-			"check": checkAlive}
+commands = {"tester": tester}
 
-def main():
-	while True:
+player = Player("callan", 100, 50, 10)
 
-		cmdLine = str(input("> "))
-		cmd, args = splitCommand(cmdLine)
-		
-		if cmd in commands:
-			commands[cmd](args)
-		else:
-			print("{0}, is not a valid command.".format(cmd))
+p = Place("house", "home")
+x = Cutscene("You are in a house")
+p.cutscene(x)
 
-def splitCommand(cmd):
-
-	cmdSplit = cmd.split()
-
-	if len(cmdSplit) == 1:
-		cmd, args = cmdSplit[0], "default"
+def runCmd(cmd, args, player):
+	if cmd in commands:
+		commands[cmd](player, args)
 	else:
-		cmd, args = cmdSplit[0], cmdSplit[1]
+		print("{0}, isn't a valid command.".format(cmd))
 
-	return cmd, args
+def main(player):
 
-if __name__ == '__main__':
-	p = player("callan", 100, 10, True)
+	while not player.dead:
+		line = str(input("> "))
+		cmd = line.split()
+		cmd.append("default")
 
-	main()
+		runCmd(cmd[0], cmd[1], player)
+
+main(player)
+

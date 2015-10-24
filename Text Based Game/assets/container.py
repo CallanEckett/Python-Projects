@@ -1,15 +1,11 @@
-class Item(object):
-    def __init__(self, name, value, quantity=1):
-        self.name = name
-        self.raw = name.strip().lower()
-        self.quantity = quantity
-
-        self.value = value
+from .item import *
 
 class Container(object):
-    def __init__(self, name):
+    def __init__(self, name, unlocked=True):
         self.name = name
         self.inside = {}
+
+        self.unlocked = unlocked
 
     def __iter__(self):
         return iter(self.inside.items())
@@ -33,9 +29,9 @@ class Container(object):
 
         if item in self:
             self[item].quantity += quantity
-            self[item].recalc()
         else:
             self[item] = item
+            self[item].quantity += (quantity -1)
 
     def remove(self, item, quantity=1):
         if item not in self:
@@ -47,4 +43,3 @@ class Container(object):
             del self.inside[item.raw]
         else:
             self[item].quantity -= quantity
-            self[item].recalc()

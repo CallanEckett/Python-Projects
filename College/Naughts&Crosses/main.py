@@ -5,8 +5,7 @@ if __name__ == '__main__':
 
 	#Declaring the player/board objects
 
-	game = board()
-	game.title()
+	game = Board()
 
 	playerOne = player(str(input("\nEnter the first players name: ")), game)
 	playerTwo = player(str(input("Enter the second players name: ")), game)

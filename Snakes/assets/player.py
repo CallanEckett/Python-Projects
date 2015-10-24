@@ -1,10 +1,10 @@
-import random
+import random, os
 
 class player(object):
 	def __init__(self, name, board):
 		self.name = name
 		self.board = board
-		
+
 		self.current = 1
 		self.nextPerson = False
 
@@ -25,7 +25,7 @@ class player(object):
 
 			print("Player {0} rolled a {1} and landed on a ladder!, they're now on square {2}".format(self.name, self.dice, self.current))
 
-		if self.current >= 100:
+		if self.current >= 15:
 			print("{0} has won the game!".format(self.name))
 			exit()
 
@@ -34,11 +34,19 @@ class player(object):
 	def list(self):
 		self.available = [
 		("roll", "rolls the dice."),
+		("clear", "clears the screen."),
 		("exit", "exits the game."),
-		("list", "list of available commands\n")]
+		("list", "list of available commands.\n")
+		]
 
 		for x, y in self.available:
 			print("{0}: {1}".format(x, y))
+
+	def clear(self):
+		if os.name == "posix":
+			os.system("clear")
+		else:
+			os.system("cls")
 
 	def exit(self):
 		exit()
@@ -52,8 +60,10 @@ class player(object):
 	def runCMD(self, cmd):
 		commands = {
 		"roll": self.roll,
-		"list": self.list,
-		"exit": self.exit}
+		"clear": self.clear,
+		"exit": self.exit,
+		"list": self.list
+		}
 
 		if cmd in commands:
 			commands[cmd]()
