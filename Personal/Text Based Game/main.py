@@ -1,30 +1,19 @@
+from commands import *
 from assets.player import *
-from assets.commands import *
-from assets.place import *
-from assets.cutscene import *
+from assets.places import *
 
-commands = {"tester": tester}
+from assets.container import *
+from assets.items import *
 
-player = Player("callan", 100, 50, 10)
-
-p = Place("house", "home")
-x = Cutscene("You are in a house")
-p.cutscene(x)
-
-def runCmd(cmd, args, player):
-	if cmd in commands:
-		commands[cmd](player, args)
-	else:
-		print("{0}, isn't a valid command.".format(cmd))
+player = Player("callan", 100, 50, 10, cell13)
 
 def main(player):
 
+	cell13.container.add(gold, 3)
+	walkway.container.add(sword, 2)
+
 	while not player.dead:
 		line = str(input("> "))
-		cmd = line.split()
-		cmd.append("default")
-
-		runCmd(cmd[0], cmd[1], player)
+		run(player, line)
 
 main(player)
-

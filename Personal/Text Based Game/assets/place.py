@@ -1,14 +1,16 @@
+from .entrances import *
+
 class Place(object):
-	def __init__(self, name, desc):
+	def __init__(self, name, desc, container, entrance):
 		self.name = name
 		self.desc = desc
+		self.container = container
+		self.entrance = entrance
 
 		self.north = None
 		self.east = None
 		self.south = None
 		self.west = None
-
-		self.cutscene = None
 
 	def connect(self, north=None, east=None, south=None, west=None):
 		self.north = north
@@ -23,6 +25,3 @@ class Place(object):
 		self.west = west 
 		if west:
 			west.east = self
-
-	def cutscene(self, cutscene):
-		self.cutscene = cutscene
